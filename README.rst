@@ -9,7 +9,7 @@ TODO
 ====
     - Add setup.py and upload to pypi.
     - Add django command for cleaning up expired session items, in hash mode.
-    - Possibly premature optimization: first try marshal v2 / yajl.
+    - Possible premature optimization: firstly try marshal v2 / yajl.
 
 Installation
 ============
