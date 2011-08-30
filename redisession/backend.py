@@ -18,13 +18,16 @@ conf = {
 }
 conf.update(getattr(settings, 'REDIS_SESSION_CONFIG', {}))
 
+# key generators should be robust for some bad keys,
+# for example, x='a', which fails x.decode('hex').
+# Here simply return an abnormal key instead of extra logic in code.
 def generator_wrapper(func):
-    def _w(*args):
+    def _w(key):
         try:
-            return func(*args)
+            return func(key)
         except:
-            # TODO: log
-            return 'possible_bad_key:%s' % args
+            # TODO: log?
+            return 'POSSIBLE_BAD_KEY:%s' % key
     return wraps(func)(_w)
 
 conf['KEY_GENERATOR'] = generator_wrapper(conf['KEY_GENERATOR'])
