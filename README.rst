@@ -58,6 +58,7 @@ Examples:
     }
 
 ::
+
     # use Redis connection instance through redisession.helper.get_redis
     # here django-redisession will try to use Redis connection instance 'foo'
     REDIS_SESSION_CONFIG = {
