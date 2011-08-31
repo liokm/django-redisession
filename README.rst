@@ -11,7 +11,7 @@ TODO
 
 Installation
 ============
-#. In source, ``python setup.py install``.
+#. ``pip install django-redisession`` or, in source, ``python setup.py install``.
 #. Add `redisession` to INSTALLED_APPS in your current settings file.
 #. Set ``SESSION_ENGINE='redisession.backend'`` in the settings file.
     
