@@ -13,6 +13,8 @@ conf = {
     'USE_HASH': True,
     'KEY_GENERATOR': lambda x: x.decode('hex'),
     'HASH_KEY_GENERATOR': lambda x: x[:4].decode('hex'),
+    'HASH_KEYS_CHECK_FOR_EXPIRY': lambda r: (reduce(lambda p,y :p.randomkey(),
+        xrange(100), r.pipeline()).execute()),
     'COMPRESS_LIB': 'snappy',
     'COMPRESS_MIN_LENGTH': 400,
 }
@@ -87,7 +89,7 @@ class SessionStore(SessionBase):
             else:
                 func = self._redis.hset
             session_data = self.encode(self._get_session(no_load=must_create))
-            expire_date = struct.pack('<i', time.time()+self.get_expiry_age())
+            expire_date = struct.pack('>I', int(time.time()+self.get_expiry_age()))
             result = func(conf['HASH_KEY_GENERATOR'](self.session_key),
                           conf['KEY_GENERATOR'](self.session_key),
                           expire_date+session_data)
@@ -99,7 +101,7 @@ class SessionStore(SessionBase):
                     conf['HASH_KEY_GENERATOR'](self.session_key),
                     conf['KEY_GENERATOR'](self.session_key))
             if session_data is not None:
-                expire_date = struct.unpack('<i', session_data[:4])[0]
+                expire_date = struct.unpack('>I', session_data[:4])[0]
                 if expire_date > time.time():
                     return self.decode(session_data[4:])
             self.create()

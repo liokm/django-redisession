@@ -2,11 +2,11 @@ from distutils.core import setup
 
 setup(
     name='django-redisession',
-    version='0.1',
+    version='0.2',
     license='MIT',
     author='Li Meng',
     author_email='liokmkoil@gmail.com',
-    packages=['redisession'],
+    packages=['redisession', 'redisession.management', 'redisession.management.commands'],
     description='A Redis-based Django session engine for django.contrib.sessions.',
     long_description=open('README.rst').read(),
     url='https://github.com/liokm/django-redisession',

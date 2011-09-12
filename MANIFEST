@@ -4,5 +4,8 @@ redisession/backend.py
 redisession/helper.py
 redisession/models.py
 redisession/tests.py
+redisession/management/__init__.py
+redisession/management/commands/__init__.py
+redisession/management/commands/cleanuprs.py
 README.rst
 LICENSE

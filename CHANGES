@@ -1,0 +1,9 @@
+* 0.2
+    * Added 'cleanuprs' management command and config option
+      'HASH_KEYS_CHECK_FOR_EXPIRY' to clean up session data
+      in hash mode.
+    * backward incompatibility: hash mode now stores expiry date in 
+      big-endian order for simpler comparation, still 4 bytes.
+      Please cleanup session if you're using hash mode in 0.1.
+* 0.1
+    * Initial version.
