@@ -9,3 +9,4 @@ redisession/management/commands/__init__.py
 redisession/management/commands/cleanuprs.py
 README.rst
 LICENSE
+CHANGES
