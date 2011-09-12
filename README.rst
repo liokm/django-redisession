@@ -110,8 +110,8 @@ then
     >>> r.info()
 
 
-Cleanup expired seseeion
-========================
+Cleanup expired sessions in hash mode
+=====================================
     run django command `cleanuprs` in shell or cronjob.
 
 Test
