@@ -36,8 +36,13 @@ conf['KEY_GENERATOR'] = generator_wrapper(conf['KEY_GENERATOR'])
 conf['HASH_KEY_GENERATOR'] = generator_wrapper(conf['HASH_KEY_GENERATOR'])
 
 if isinstance(conf['SERVER'], dict):
-    import redis
-    get_redis = lambda x: redis.Redis(**x)
+    class GetRedis(object):
+        def __call__(self, conf):
+            if not hasattr(self, '_redis'):
+                import redis
+                self._redis = redis.Redis(**conf)
+            return self._redis
+    get_redis = GetRedis()
 else:
     from redisession.helper import get_redis
 

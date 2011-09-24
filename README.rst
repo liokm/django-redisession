@@ -5,13 +5,9 @@ A Redis-based Django session engine for django.contrib.sessions.
 
 This engine supports storing session data as a Redis String, or distributing sessions to Redis hashs for more efficient usage of Redis storage(without much extra CPU cost on Redis server. Refs http://antirez.com/post/redis-weekly-update-7.html and http://redis.io/topics/memory-optimization , you may need to tweak Redis conf for actual usage. The tech is referred as hash mode below).
 
-TODO
-====
-    - Possible premature optimization: firstly try marshal v2 / yajl.
-
 Installation
 ============
-#. ``pip install django-redisession`` or, in source, ``python setup.py install``.
+#. ``pip install django-redisession`` , or in source, ``python setup.py install``.
 #. Add `redisession` to INSTALLED_APPS in your current settings file.
 #. Set ``SESSION_ENGINE='redisession.backend'`` in the settings file.
     
