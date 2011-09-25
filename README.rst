@@ -93,7 +93,8 @@ You could use ``redisession.helper.get_redis`` to create and get global Redis co
     REDIS_CONFIG = {
         # 'name': arguments passed to redis.Redis to build a connection instance, as dict items
         'default': {'port':63790, 'db':1},
-        'foo': {'db':2, unix_socket_path='/tmp/bar'}
+        'foo': {'db':2, unix_socket_path='/tmp/bar'},
+        'session': {'db':3},
     }
 
 then
@@ -103,7 +104,16 @@ then
     >>> from redisession.helper import get_redis
     >>> r = get_redis() # get Redis connection instance of name 'default'
     >>> r = get_redis('foo') # or of name 'foo'
+    >>> r = get_redis('session') # use db 3 for sessions only
     >>> r.info()
+
+Security
+========
+Isolate the Redis server of storing sessions from other usages is RECOMMENDED.
+You could achieve this by using a seperate db, like conf 'session' in REDIS_CONFIG above,
+or by specifying a unique key prefix in KEY_GENERATOR.
+For possible security issue, refs https://www.djangoproject.com/weblog/2011/sep/09/security-releases-issued/
+and https://code.djangoproject.com/changeset/16759
 
 
 Cleanup expired sessions in hash mode
