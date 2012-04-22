@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='django-redisession',
-    version='0.2',
+    version='0.3',
     license='MIT',
     author='Li Meng',
     author_email='liokmkoil@gmail.com',
