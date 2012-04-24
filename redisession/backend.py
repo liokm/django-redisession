@@ -129,7 +129,7 @@ class SessionStore(SessionBase):
         def exists(self, session_key):
             key = self._make_key(session_key)
             if key is not None:
-                return self._redis.hexists(*self._make_key(session_key))
+                return self._redis.hexists(*key)
             return False
 
         def delete(self, session_key=None):
@@ -177,7 +177,7 @@ class SessionStore(SessionBase):
         def exists(self, session_key):
             key = self._make_key(session_key)
             if key is not None:
-                return self._make_key(session_key) in self._redis
+                return key in self._redis
             return False
 
         def delete(self, session_key=None):
